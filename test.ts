@@ -1,22 +1,27 @@
-import { args, exit, lstat } from 'deno'
+import { args, exit, lstat, removeAll } from 'deno'
 import mkdirp from './mkdirp'
 
-const TEST_DIR: string = `${args[1] || './testdir'}/levelx/levely`
+const root_dir: string = args[1] || './mkdirp_test_root_dir'
+const leaf_dir: string = `${root_dir}/levelx/levely`
 
-async function test () : Promise<void> {
+const test_end: Function = async (code?: number) : Promise<void> => {
+  try { await removeAll(root_dir) } catch (_) {}
+  exit(code)
+}
+
+const test: Function = async () : Promise<void> => {
   try {
-    await mkdirp(TEST_DIR)
-    if (!(await lstat(TEST_DIR)).isDirectory()) {
+    await mkdirp(leaf_dir, 0o744)
+    if (!(await lstat(leaf_dir)).isDirectory()) {
       console.error('not ok mkdirp')
-      exit(1)
+      await test_end(1)
     } else {
-      console.log('ok mkdirp')
-      console.log('test passed')
-      exit(0)
+      console.log('ok mkdirp\ntest passed')
+      await test_end(0)
     }
   } catch (err) {
     console.error('test failed', err.stack)
-    exit(1)
+    await test_end(1)
   }
 }
 

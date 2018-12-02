@@ -5,7 +5,7 @@ const PATH_SEPARATOR: string = platform.os === 'win' ? '\\' : '/'
 export default async function mkdirp (path: string, mode?: number) : Promise<void> {
   const levels: string[] = path
     .split(/\/|\\/)
-    .reduce(function (acc: string[], _: string, i: number, arr: string[]) : string[] {
+    .reduce((acc: string[], _: string, i: number, arr: string[]) : string[] => {
       acc.push(arr.slice(0, i + 1).join(PATH_SEPARATOR))
       return acc
     }, [])

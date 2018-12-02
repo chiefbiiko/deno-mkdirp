@@ -1,5 +1,7 @@
 os:
   - linux
   - osx
-before_script: curl https://raw.githubusercontent.com/chiefbiiko/deno-bash-installer/master/install.sh | sudo bash
-script: sudo deno --allow-write --log-debug ./test.ts /tmp/mkdirp_test_root
+# install deno
+before_script: curl -s https://raw.githubusercontent.com/chiefbiiko/deno-bash-installer/master/install.sh | sudo bash
+# run da test, travis requires sudo when writing
+script: sudo deno --allow-write ./test.ts ./mkdirp_test_root_dir
