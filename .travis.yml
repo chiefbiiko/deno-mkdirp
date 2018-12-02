@@ -2,5 +2,4 @@ os:
   - linux
   - osx
 before_script: curl https://raw.githubusercontent.com/chiefbiiko/deno-bash-installer/master/install.sh | sudo bash
-script: deno --allow-write ./test.ts ./mkdirptest
-after_script: rm -rf ./mkdirptest
+script: sudo deno --allow-write --log-debug ./test.ts /tmp/mkdirp_test_root

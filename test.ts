@@ -5,7 +5,7 @@ const TEST_DIR: string = `${args[1] || './testdir'}/levelx/levely`
 
 async function test () : Promise<void> {
   try {
-    await mkdirp(TEST_DIR, 0o744)
+    await mkdirp(TEST_DIR)
     if (!(await lstat(TEST_DIR)).isDirectory()) {
       console.error('not ok mkdirp')
       exit(1)
