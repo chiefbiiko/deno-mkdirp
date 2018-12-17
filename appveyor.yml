@@ -1,0 +1,10 @@
+install:
+  # TODO: run that deno powershell install script
+  - ps: iex (iwr https://deno.land/x/install/install.ps1)
+  - set PATH=%HOMEPATH%\.deno\bin;%PATH%
+  - set CI=true
+build: off
+shallow_clone: true
+test_script:
+  - deno --version
+  - deno --allow-write ./test.ts ./mkdirp_test_root_dir

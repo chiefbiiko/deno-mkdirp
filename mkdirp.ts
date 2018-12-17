@@ -16,7 +16,6 @@ export default async function mkdirp (path: string, mode?: number) : Promise<voi
     try {
       info = await lstat(level)
       if (!info.isDirectory()) throw Error(`${level} is not a directory`)
-      else if (mode && info.mode !== mode) await chmod(level, mode)
     } catch (err) {
       if (err.kind !== ErrorKind.NotFound) throw err
       await mkdir(level, mode)
