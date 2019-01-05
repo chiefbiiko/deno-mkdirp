@@ -1,5 +1,4 @@
 install:
-  # TODO: run that deno powershell install script
   - ps: iex (iwr https://deno.land/x/install/install.ps1)
   - set PATH=%HOMEPATH%\.deno\bin;%PATH%
   - set CI=true
